@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 50d8a31085666485c8afde3a26449574
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: -1763442852772302276
+    second: Stone_2|Cube.003Action
+  - first:
+      74: 6302998825550593681
+    second: Stone_2|Cube.005Action
+  - first:
+      74: 3574967171880264130
+    second: Stone_2|Cube.006Action
+  - first:
+      74: -1578285122869226480
+    second: Stone_2|Cube.007Action
+  - first:
+      74: -2820549160839706845
+    second: Stone_2|Cube.007Action.001
+  - first:
+      74: -2588368615721496289
+    second: Stone_2|PapuanRigAction.001
+  - first:
+      74: 3783805156516163206
+    second: Stone_3|Cube.003Action
+  - first:
+      74: -8547692291877493076
+    second: Stone_3|Cube.005Action
+  - first:
+      74: 7690969791113527454
+    second: Stone_3|Cube.006Action
+  - first:
+      74: -3135852752122207359
+    second: Stone_3|Cube.007Action
+  - first:
+      74: 6839555076255721257
+    second: Stone_3|Cube.007Action.001
+  - first:
+      74: 7147933599279906377
+    second: Stone_3|PapuanRigAction.001
+  - first:
+      74: -1383624731526031475
+    second: Stone_4|Cube.003Action
+  - first:
+      74: -3813793409886509249
+    second: Stone_4|Cube.005Action
+  - first:
+      74: 1853819147574218889
+    second: Stone_4|Cube.006Action
+  - first:
+      74: 4591139913013277503
+    second: Stone_4|Cube.007Action
+  - first:
+      74: -2415429214928032540
+    second: Stone_4|Cube.007Action.001
+  - first:
+      74: 2741001693918911420
+    second: Stone_4|PapuanRigAction.001
+  - first:
+      74: 1269808146653948216
+    second: Stone_5|Cube.003Action
+  - first:
+      74: 4907994310210771043
+    second: Stone_5|Cube.005Action
+  - first:
+      74: -582347734630270255
+    second: Stone_5|Cube.006Action
+  - first:
+      74: -6775786795284763029
+    second: Stone_5|Cube.007Action
+  - first:
+      74: 5557343341160689311
+    second: Stone_5|Cube.007Action.001
+  - first:
+      74: -7872446538748194295
+    second: Stone_5|PapuanRigAction.001
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

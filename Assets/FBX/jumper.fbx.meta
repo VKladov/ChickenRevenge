@@ -1,0 +1,227 @@
+fileFormatVersion: 2
+guid: 195a788112b954d2eaa6fda7825baca6
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: -6993530764828437508
+    second: jumper_idle
+  - first:
+      74: -8292413826207966393
+    second: JumperRig|Cube.003Action.001
+  - first:
+      74: -6888338459661984066
+    second: JumperRig|Cube.005Action
+  - first:
+      74: 4000807233078489778
+    second: JumperRig|Cube.005Action.001
+  - first:
+      74: 3748782990540948033
+    second: JumperRig|Cube.006Action
+  - first:
+      74: -8105678648148778167
+    second: JumperRig|Cube.007Action
+  - first:
+      74: 2754259796155314612
+    second: JumperRig|Cube.007Action.001
+  - first:
+      74: 829853787188110209
+    second: jumper_jump
+  - first:
+      74: -2934197983987035354
+    second: JumperRig|papuan_idle
+  - first:
+      74: 4339698481166452694
+    second: JumperRig|papuan_idle.001
+  - first:
+      74: 6164121233238991066
+    second: JumperRig|papuan_idle.002
+  - first:
+      74: 104492470046946017
+    second: JumperRig|papuan_leader_walk
+  - first:
+      74: 931488881333024760
+    second: JumperRig|papuan_walk
+  - first:
+      74: -7382770370260141046
+    second: JumperRig|PapuanRigAction.001
+  - first:
+      74: 2953346629049143811
+    second: JumperRig|truck_friver_drive
+  - first:
+      74: -7577314217919011430
+    second: JumperRig|Wood_1Action
+  - first:
+      74: 8636050175563194051
+    second: JumperRig|Wood_2Action
+  - first:
+      74: -1950988465942166368
+    second: JumperRig|Wood_3Action
+  - first:
+      74: 2288688230017610614
+    second: JumperRig|Wood_3Action.001
+  - first:
+      74: 357861174825509856
+    second: JumperRig|Wood_4Action
+  - first:
+      74: 4296767695515871646
+    second: JumperRig|Wood_4Action.001
+  - first:
+      74: 354846849888143715
+    second: JumperRig|Wood_5Action
+  - first:
+      74: -339244109788425968
+    second: JumperRig|Wood_5Action.001
+  - first:
+      74: -7649250464935238823
+    second: JumperRig|Wood_5Action.002
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: jumper_jump
+      takeName: JumperRig|jumper_jump
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: jumper_idle
+      takeName: JumperRig|jumper_jump
+      internalID: 0
+      firstFrame: 15
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

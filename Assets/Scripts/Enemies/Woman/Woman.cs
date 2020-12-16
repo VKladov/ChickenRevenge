@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class Woman : DamageReceiver
+public class Woman : Enemy
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _sideSpeed;
@@ -61,13 +61,6 @@ public class Woman : DamageReceiver
 
         transform.position = nextPosition;
         transform.rotation = Quaternion.LookRotation(movement, transform.up);
-
-        //Vector3 forwardRelativeToSurfaceNormal = Vector3.Cross(transform.forward, normal);
-        //Quaternion targetRotation = Quaternion.LookRotation(forwardRelativeToSurfaceNormal, normal);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 2);
-
-        //Quaternion nextRotation = Quaternion.FromToRotation(Vector3.forward, movement) * Quaternion.FromToRotation(Vector3.up, normal);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, Time.deltaTime * 10);
     }
 
     public override void TakeDamage(int damage, bool fromPlayer = false)

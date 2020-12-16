@@ -1,31 +1,29 @@
 ﻿<Properties StartupConfiguration="{83781460-430E-2AC7-7508-6D853317C74D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Obstacles/Tree.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Obstacles/ShootableObject.cs">
     <Files>
-      <File FileName="Assets/UI/WavesNumberView.cs" Line="111" Column="41" />
-      <File FileName="Assets/Scripts/GameLoop/GameLoop.cs" Line="60" Column="39" />
-      <File FileName="Assets/Scripts/Obstacles/ObstacleSpawner.cs" Line="44" Column="6" />
-      <File FileName="Assets/Scripts/Enemies/Papuan/Papuan.cs" Line="77" Column="30" />
-      <File FileName="Assets/Scripts/Enemies/Papuan/PapuanSpawner.cs" Line="54" Column="82" />
-      <File FileName="Assets/Scripts/StonesSpawner.cs" Line="16" Column="143" />
-      <File FileName="Assets/Scripts/Enemies/Roller/RollerSpawner.cs" Line="109" Column="66" />
-      <File FileName="Assets/Scripts/Enemies/Woman/WomanSpawner.cs" Line="46" Column="58" />
+      <File FileName="Assets/Scripts/Weapons/HitscanGun.cs" Line="23" Column="71" />
+      <File FileName="Assets/Scripts/Weapons/ProjectileGun.cs" />
+      <File FileName="Assets/Scripts/Weapons/Projectile.cs" />
+      <File FileName="Assets/Scripts/Enemies/Jumper/Jumper.cs" />
+      <File FileName="Assets/Scripts/DamageDealer.cs" />
+      <File FileName="Assets/Scripts/Enemies/Bird/Bomb.cs" />
+      <File FileName="Assets/Scripts/Weapons/Grenade.cs" />
+      <File FileName="Assets/Scripts/DoubleRifle.cs" />
       <File FileName="Assets/Scripts/CharacterShooting.cs" />
-      <File FileName="Assets/Scripts/Bonuses/BonusName.cs" />
-      <File FileName="Assets/Scripts/Effects.cs" />
-      <File FileName="Assets/Scripts/DoubleRifle.cs" Line="36" Column="37" />
-      <File FileName="Assets/Scripts/GameField/GameField.cs" Line="84" Column="6" />
-      <File FileName="Assets/Scripts/Player.cs" Line="55" Column="34" />
-      <File FileName="Assets/Scripts/Enemies/Roller/Roller.cs" Line="79" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/Woman/Woman.cs" Line="61" Column="1" />
-      <File FileName="Assets/Scripts/Sounds.cs" Line="29" Column="33" />
-      <File FileName="Assets/Scripts/Obstacles/Palm.cs" Line="17" Column="37" />
-      <File FileName="Assets/Scripts/Obstacles/Tree.cs" Line="11" Column="30" />
-      <File FileName="Assets/Scripts/Obstacles/Obstacle.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Obstacles/Stone/Stone.cs" Line="22" Column="36" />
+      <File FileName="Assets/Scripts/Obstacles/Stone/StonePiece.cs" />
+      <File FileName="Assets/Scripts/Obstacles/ObstacleSpawner.cs" />
+      <File FileName="Assets/Scripts/GameLoop/GameLoop.cs" />
+      <File FileName="Assets/Scripts/GameField/GameField.cs" />
+      <File FileName="Assets/Scripts/Obstacles/Obstacle.cs" />
+      <File FileName="Assets/Scripts/CharacterMover.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Obstacles/ShootableObject.cs" Line="18" Column="74" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d1636a25-1bd3-403e-9652-06574c6e75e2" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="752c408e-02ae-42bd-a9fa-43489a5a4774" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -638,8 +638,14 @@
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Path.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
@@ -665,8 +671,23 @@
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEngineBridge.001">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Runtime">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Runtime">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
@@ -677,17 +698,35 @@
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Common.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEditorBridge.001">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Parabox.CSG.Demo.csproj">
+      <Project>{014AD386-1B3F-718E-529C-498ACE04AAAE}</Project>
+      <Name>Parabox.CSG.Demo</Name>
+    </ProjectReference>
+    <ProjectReference Include="Parabox.CSG.csproj">
+      <Project>{065FA5F1-AFF0-09B2-911D-53C56F5A4471}</Project>
+      <Name>Parabox.CSG</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

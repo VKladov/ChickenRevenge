@@ -11,6 +11,9 @@ public class GameLoop : MonoBehaviour
     [SerializeField] private BonusSpawner _bonusSpawner;
     [SerializeField] private PapuanSpawner _papuanSpawner;
     [SerializeField] private RollerSpawner _rollerSpawner;
+    [SerializeField] private WomanSpawner _womanSpawner;
+    [SerializeField] private BirdSpawner _birdSpawner;
+    [SerializeField] private JumperSpawner _jumperSpawner;
     [SerializeField] private LevelBuilder _levelBuilder;
     [SerializeField] private float _wavesDelay = 2f;
     [SerializeField] private int _lifes = 5;
@@ -100,8 +103,13 @@ public class GameLoop : MonoBehaviour
                 _papuanSpawner.SpawnGroup(col, 1);
         }
 
-        _rollerSpawner.SetSpawnDelay(10);
-        _rollerSpawner.StartSpawn(index > 5);
+        _rollerSpawner.SetSpawnDelay(5);
+        _womanSpawner.SetSpawnDelay(5);
+        _birdSpawner.SetSpawnDelay(5);
+
+        //_rollerSpawner.StartSpawn(index > 5);
+        //_womanSpawner.StartSpawn(index > 5);
+        //_birdSpawner.StartSpawn(index > 5);
     }
 
     private void StartWave(int index, bool delay)
@@ -124,7 +132,13 @@ public class GameLoop : MonoBehaviour
     private void FinishWave()
     {
         _rollerSpawner.DestroyAll();
+        _womanSpawner.DestroyAll();
+        _birdSpawner.DestroyAll();
+
         _rollerSpawner.StopSpawn();
+        _womanSpawner.StopSpawn();
+        _birdSpawner.StopSpawn();
+
         _obstacleSpawner.RestoreCactuses();
     }
 
@@ -220,7 +234,19 @@ public class GameLoop : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-            NextLevel();
+        if (Input.GetKeyDown(KeyCode.C))
+            _rollerSpawner.Spawn();
+
+        if (Input.GetKeyDown(KeyCode.V))
+            _womanSpawner.Spawn();
+
+        if (Input.GetKeyDown(KeyCode.B))
+            _birdSpawner.Spawn();
+
+        if (Input.GetKeyDown(KeyCode.N))
+            _jumperSpawner.Spawn();
+
+        if (Input.GetKeyDown(KeyCode.M))
+            _obstacleSpawner.SpawnStone();
     }
 }

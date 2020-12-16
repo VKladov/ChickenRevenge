@@ -16,6 +16,12 @@ public class Sounds : MonoBehaviour
     [SerializeField] private AudioClip[] _coinGone;
     [SerializeField] private AudioClip[] _explosion;
     [SerializeField] private AudioClip[] _woodHit;
+    [SerializeField] private AudioClip[] _birdAppear;
+    [SerializeField] private AudioClip[] _birdAttack;
+    [SerializeField] private AudioClip[] _birdDestroy;
+    [SerializeField] private AudioClip[] _bombFalling;
+    [SerializeField] private AudioClip[] _jumperJump;
+    [SerializeField] private AudioClip[] _jumperDestroy;
 
     private List<AudioSource> _buffer = new List<AudioSource>();
 
@@ -48,6 +54,18 @@ public class Sounds : MonoBehaviour
     public void PlayExplosion(Vector3 position) => PlayRandomSound(position, _explosion);
 
     public void PlayWoodHit(Vector3 position) => PlayRandomSound(position, _woodHit);
+
+    public void PlayBirdAppear(Vector3 position) => PlayRandomSound(position, _birdAppear);
+
+    public void PlayBirdAttack(Vector3 position) => PlayRandomSound(position, _birdAttack);
+
+    public void PlayBirdDestroy(Vector3 position) => PlayRandomSound(position, _birdDestroy);
+
+    public void PlayBombFalling(Vector3 position) => PlayRandomSound(position, _bombFalling);
+
+    public void PlayJumperJump(Vector3 position) => PlayRandomSound(position, _jumperJump);
+
+    public void PlayJumperDestroy(Vector3 position) => PlayRandomSound(position, _jumperDestroy);
 
     private void PlayRandomSound(Vector3 position, AudioClip[] clips) => PlaySound(position, clips[Random.Range(0, clips.Length)]);
 

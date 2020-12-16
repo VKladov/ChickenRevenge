@@ -67,7 +67,6 @@
     <Compile Include="Assets\Scripts\Bonuses\Bonus.cs" />
     <Compile Include="Assets\Scripts\Bonuses\BonusName.cs" />
     <Compile Include="Assets\Scripts\Bonuses\BonusSpawner.cs" />
-    <Compile Include="Assets\Scripts\BorderMaker.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\BulletTrail.cs" />
     <Compile Include="Assets\Scripts\CharacterAiming.cs" />
@@ -77,6 +76,13 @@
     <Compile Include="Assets\Scripts\DamageReceiver.cs" />
     <Compile Include="Assets\Scripts\DoubleRifle.cs" />
     <Compile Include="Assets\Scripts\Effects.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Bird\Bird.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Bird\BirdSpawner.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Bird\Bomb.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Jumper\Jumper.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Jumper\JumperSpawner.cs" />
     <Compile Include="Assets\Scripts\Enemies\Papuan\Papuan.cs" />
     <Compile Include="Assets\Scripts\Enemies\Papuan\PapuanSpawner.cs" />
     <Compile Include="Assets\Scripts\Enemies\Roller\Roller.cs" />
@@ -91,7 +97,6 @@
     <Compile Include="Assets\Scripts\GameLoop\GameLoop.cs" />
     <Compile Include="Assets\Scripts\GameLoop\PapuansSpawnGroup.cs" />
     <Compile Include="Assets\Scripts\GameLoop\PapuansSpawnWave.cs" />
-    <Compile Include="Assets\Scripts\GunBarrel.cs" />
     <Compile Include="Assets\Scripts\IKFabric.cs" />
     <Compile Include="Assets\Scripts\Obstacles\BreakableObstacle.cs" />
     <Compile Include="Assets\Scripts\Obstacles\Cactus\Cactus.cs" />
@@ -99,6 +104,9 @@
     <Compile Include="Assets\Scripts\Obstacles\Obstacle.cs" />
     <Compile Include="Assets\Scripts\Obstacles\ObstacleSpawner.cs" />
     <Compile Include="Assets\Scripts\Obstacles\Palm.cs" />
+    <Compile Include="Assets\Scripts\Obstacles\ShootableObject.cs" />
+    <Compile Include="Assets\Scripts\Obstacles\Stone\Stone.cs" />
+    <Compile Include="Assets\Scripts\Obstacles\Stone\StonePiece.cs" />
     <Compile Include="Assets\Scripts\Obstacles\Tree.cs" />
     <Compile Include="Assets\Scripts\PapuanMeetCollider.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
@@ -107,6 +115,11 @@
     <Compile Include="Assets\Scripts\StonesSpawner.cs" />
     <Compile Include="Assets\Scripts\Walking\Leg.cs" />
     <Compile Include="Assets\Scripts\Walking\Walking.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Grenade.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Gun.cs" />
+    <Compile Include="Assets\Scripts\Weapons\HitscanGun.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Weapons\ProjectileGun.cs" />
     <Compile Include="Assets\UI\EnemyDirectionView.cs" />
     <Compile Include="Assets\UI\LifesCounterView.cs" />
     <Compile Include="Assets\UI\PapuanCounterView.cs" />
@@ -702,8 +715,14 @@
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Path.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
@@ -729,8 +748,23 @@
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEngineBridge.001">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Runtime">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Runtime">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
@@ -741,11 +775,20 @@
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Editor">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEditorBridge.001">
+      <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>/Users/vladimirkladov/UnityGames/Chicken Revenge/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -755,6 +798,14 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{F5F8549E-A0BC-C8B9-C50C-DB83A4BA1879}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="Parabox.CSG.Demo.csproj">
+      <Project>{014AD386-1B3F-718E-529C-498ACE04AAAE}</Project>
+      <Name>Parabox.CSG.Demo</Name>
+    </ProjectReference>
+    <ProjectReference Include="Parabox.CSG.csproj">
+      <Project>{065FA5F1-AFF0-09B2-911D-53C56F5A4471}</Project>
+      <Name>Parabox.CSG</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

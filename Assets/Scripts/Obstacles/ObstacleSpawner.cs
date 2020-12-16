@@ -8,6 +8,7 @@ public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private GameField _field;
     [SerializeField] private Cactus[] _cactusPrefabs;
+    [SerializeField] private Stone[] _stonePrefabs;
     [SerializeField] private LayerMask _groundMask;
 
     [Header("Dry Trees")]
@@ -56,6 +57,22 @@ public class ObstacleSpawner : MonoBehaviour
     {
         left = col > 0 && IsCellEmpty(row, col - 1);
         right = col < _field.Cols && IsCellEmpty(row, col);
+    }
+
+    private bool GetRandomEmptyPoint(out int row, out int col)
+    {
+        row = 0;
+        col = 0;
+        List<Vector2> emptyCells = GetEmptyCells(_field.MinRow, _field.MinRow + _field.Rows, 0, _field.Cols);
+        if (emptyCells.Count > 0)
+        {
+            Vector2 cell = emptyCells[Random.Range(0, emptyCells.Count)];
+            row = (int)cell.x;
+            col = (int)cell.y;
+            return true;
+        }
+        else
+            return false;
     }
 
     private Obstacle GetObstacle(int row, int col)
@@ -264,4 +281,10 @@ public class ObstacleSpawner : MonoBehaviour
     }
 
     private bool IsCellEmpty(int row, int col) => GetObstacle(row, col) == null;
+
+    public void SpawnStone()
+    {
+        if (GetRandomEmptyPoint(out int row, out int col))
+            SpawnObstacle(_stonePrefabs[Random.Range(0, _stonePrefabs.Length)], row, col, 1, 1);
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacle : DamageReceiver
 {
-    [SerializeField] private ParticleSystem _damageParticle;
+    [SerializeField] protected ParticleSystem _damageParticle;
 
     public override void TakeDamage(int damage, bool fromPlayer = false)
     {

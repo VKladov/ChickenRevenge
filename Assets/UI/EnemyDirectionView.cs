@@ -8,14 +8,21 @@ public class EnemyDirectionView : MonoBehaviour
 {
     private RectTransform _rectTransform;
     [SerializeField] RollerSpawner _rollerSpawner;
+    [SerializeField] WomanSpawner _womanSpawner;
+    [SerializeField] BirdSpawner _birdSpawner;
     [SerializeField] Image _icon;
 
     private List<Image> _icons = new List<Image>();
+    private List<EnemySpawner> _spawners = new List<EnemySpawner>();
 
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         _icons.Add(_icon);
+
+        _spawners.Add(_rollerSpawner);
+        _spawners.Add(_womanSpawner);
+        _spawners.Add(_birdSpawner);
     }
 
     private Vector2 GetInRectPosition(Vector3 position)
@@ -25,7 +32,7 @@ public class EnemyDirectionView : MonoBehaviour
             position.y = 1 - position.y;
             position.x = 1 - position.x;
         }
-        if (position.x >= 0 && position.x <= 1)
+        if (position.x >= 0 && position.x <= 1 && position.y < 1)
             position.y = 0;
 
         return new Vector2(
@@ -36,7 +43,11 @@ public class EnemyDirectionView : MonoBehaviour
 
     private void Update()
     {
-        List<Vector3> positions = _rollerSpawner.RollersInCameraPositions;
+        List<Vector3> positions = new List<Vector3>();
+
+        foreach (EnemySpawner spawner in _spawners)
+            positions.AddRange(spawner.ItemsInCameraPositions);
+
         for (int i = 0; i < positions.Count; i++)
         {
             if (i > _icons.Count - 1)

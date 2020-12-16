@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Roller : DamageReceiver
+public class Roller : Enemy
 {
     [SerializeField] private RollerWheel _wheel;
     [SerializeField] private RollerDriver _driver;
@@ -85,6 +85,5 @@ public class Roller : DamageReceiver
 
         transform.position = nextPosition;
         transform.rotation = Quaternion.LookRotation(movement, transform.up);
-
     }
 }

@@ -43,10 +43,11 @@ public class WavesNumberView : MonoBehaviour
 
     private void BuildLetters()
     {
-        string str = "wave_1";
+        string str = "волна_1";
         foreach (var letter in str)
         {
             TMP_Text text = Instantiate(_textPrefab, transform);
+            text.raycastTarget = false;
             text.text = letter + "";
             text.OnPreRenderText += OnPreRenderText;
             _letters.Add(text);
@@ -108,8 +109,7 @@ public class WavesNumberView : MonoBehaviour
 
     private void ShowWave(int index)
     {
-        Debug.Log("ShowWave: " + index);
-        _letters[5].text = (index + 1) + "";
+        _letters[_letters.Count - 1].text = (index + 1) + "";
         ShowText();
         if (_hideWork != null)
             StopCoroutine(_hideWork);

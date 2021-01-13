@@ -2,152 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator))]
-public class Papuan : DamageReceiver
+[RequireComponent(typeof(Rigidbody))]
+public class Papuan : Character
 {
     [SerializeField] private float _speed = 1f;
     [SerializeField] private GameObject _fork;
+    [SerializeField] private float _viewDistance;
+    [SerializeField] private Transform _viewPoint;
+    [SerializeField] private float _fieldOfView;
+    [SerializeField] private MeshRenderer _teamMark;
 
-    private Animator _animator;
-    private PapuanSpawner _spawner;
+    public Animator Animator { get; private set; }
+    public float Speed => _speed;
+    public float ViewDistance => _viewDistance;
+    public Transform ViewPoint => _viewPoint;
+    public Gate TargetGate { get; private set; }
+    public GateSlote TargetSlote;
 
-    private Vector3 _direction;
-    private Vector3 _targetPosition;
-    private bool _isGoingDown = true;
-    private bool _canRunDown = false;
-    private Papuan _leader = null;
-    private bool _isLeader = false;
-    private bool _caughtChicken = false;
+    private Rigidbody _rigidbody;
+    private Character _player;
 
-    public int Row { get; protected set; }
-    public int Col { get; protected set; }
-    public Vector3 TargetPosition => _targetPosition;
-
-    public void Init(PapuanSpawner spawner, int row, int col, Papuan leader)
+    public bool CouldSeeCharacter(Character character)
     {
-        _spawner = spawner;
-        Row = row;
-        Col = col;
-        _leader = leader;
-        if (_leader != null)
-            _leader.Disappeared += OnLeaderDied;
+        if (Vector3.Distance(transform.position, character.transform.position) > ViewDistance)
+                return false;
 
-        _targetPosition = transform.position;
-        SetNextTargetPosition();
+            float angle = Vector3.Angle(ViewPoint.forward, character.transform.position - transform.position);
+
+            if (angle > _fieldOfView / 2)
+                return false;
+
+            return true;
     }
 
-    private void OnDisable()
+    public void Init(Gate targetGate, Character player)
     {
-        if (_leader != null)
-            _leader.Disappeared -= OnLeaderDied;
+        TargetGate = targetGate;
+        TargetSlote = targetGate.GetSlote();
+        _player = player;
     }
 
     override protected void Awake()
     {
         base.Awake();
-        _animator = GetComponent<Animator>();
-        _fork.SetActive(false);
+        Animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    public void Move(Vector3 direction)
     {
-        if (_caughtChicken)
-            return;
-
-        if (Vector3.Distance(transform.position, _targetPosition) < 0.1f)
-            SetNextTargetPosition();
-
-        Move();
+        Vector3 movement = direction * _speed * Time.deltaTime;
+        _rigidbody.MovePosition(transform.position + movement);
+        RotateTo(direction);
+        Animator.SetFloat("walkSpeed", _speed);
     }
 
-    public void RunDown(float targetZ)
+    public void RotateTo(Vector3 direction)
     {
-        if (_canRunDown || _caughtChicken) { return; }
-        _canRunDown = true;
-        _speed *= Random.Range(2f, 2.5f);
-        _targetPosition = new Vector3(transform.position.x, 0, targetZ);
+        direction.y = 0;
+        _rigidbody.MoveRotation(Quaternion.LookRotation(direction, transform.up));
     }
 
-    public void Move()
+    public void SetMarkMaterial(Material material)
     {
-        _direction = (_targetPosition - transform.position).normalized;
-
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_direction, transform.up), Time.deltaTime * 10);
-        _animator.SetFloat("walkSpeed", _speed);
+        _teamMark.material = material;
     }
 
-    public void SetNextTargetPosition()
+    public override void TakeShot(int damage)
     {
-        if (_canRunDown)
-        {
-            Destroy();
-            return;
-        }
+        base.TakeShot(damage);
 
-        if (_targetPosition.magnitude > 0)
-            transform.position = _targetPosition;
-
-        _spawner.GetAllowedDirections(Row, Col, out bool left, out bool right);
-        if (_direction.x < 0 && !left || _direction.x > 0 && !right || (!left && !right && _direction.x == 0))
-        {
-            if (Row == _spawner.MinRow)
-                _isGoingDown = false;
-            if (Row == _spawner.MinRow + _spawner.PlayerRows)
-                _isGoingDown = true;
-
-            Row += _isGoingDown ? -1 : 1;
-        }
-        else if (left && right)
-        {
-            if (_direction.x == 0)
-                Col += -1;
-            else
-                Col += _direction.x < 0 ? -1 : 1;
-        }
-        else if (left)
-        {
-            Col--;
-        }
-        else if (right)
-        {
-            Col++;
-        }
-
-        _targetPosition = _spawner.GetPosition(Row, Col);
-
-        if (_leader == null || (_leader != null && _leader.TargetPosition != _targetPosition))
-            BecomeLeader();
-    }
-
-    public void TakeDamage()
-    {
-        Killed?.Invoke(this);
-        Destroy(gameObject);
-    }
-
-    public void BecomeLeader()
-    {
-        if (_isLeader)
-            return;
-
-        _isLeader = true;
-        _fork.SetActive(true);
-        _animator.SetBool("IsLeader", true);
-    }
-
-    private void OnLeaderDied(DamageReceiver leader)
-    {
-        BecomeLeader();
-    }
-
-    public void CatchPlayer(Player player)
-    {
-        transform.position = player.transform.position;
-        transform.rotation = player.transform.rotation;
-        BecomeLeader();
-        _caughtChicken = true;
-        _animator.SetTrigger("attack");
+        LastDamageSource = _player;
     }
 }

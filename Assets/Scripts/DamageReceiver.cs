@@ -13,10 +13,22 @@ public class DamageReceiver : MonoBehaviour
     public UnityAction<DamageReceiver> Killed;
     public UnityAction<DamageReceiver> Disappeared;
     public bool IsDamaged => _health < _maxHealth;
+    public int Health => _health;
+    public int MaxHealth => _maxHealth;
 
     protected virtual void Awake()
     {
         _health = _maxHealth;
+    }
+
+    virtual public void TakeShot(int damage)
+    {
+        TakeDamage(damage, true);
+    }
+
+    virtual public void TakeHit(int damage, Vector3 direction, bool fromPlayer = false)
+    {
+        TakeDamage(damage, fromPlayer);
     }
 
     virtual public void TakeDamage(int damage, bool fromPlayer = false)
@@ -35,6 +47,14 @@ public class DamageReceiver : MonoBehaviour
     public void Destroy()
     {
         Destroyed?.Invoke(this);
+        if (ShouldDestroy())
+            StartCoroutine(DestroyInNextFrame());
+    }
+
+    virtual public bool ShouldDestroy() => true;
+
+    virtual public void OnDestoy()
+    {
         StartCoroutine(DestroyInNextFrame());
     }
 

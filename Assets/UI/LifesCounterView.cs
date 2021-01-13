@@ -7,16 +7,21 @@ using TMPro;
 public class LifesCounterView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _text;
-    [SerializeField] private GameLoop _game;
+    [SerializeField] private Player _player;
 
     private void OnEnable()
     {
-        _game.LivesChanged += OnLivesChanged;
+        _player.HealthChanged += OnLivesChanged;
+    }
+
+    private void Start()
+    {
+        OnLivesChanged(_player.Health);
     }
 
     private void OnDisable()
     {
-        _game.LivesChanged -= OnLivesChanged;
+        _player.HealthChanged -= OnLivesChanged;
     }
 
     public void OnLivesChanged(int count)

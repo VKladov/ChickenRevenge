@@ -74,7 +74,6 @@ public class DoubleRifle : MonoBehaviour
 
 
         BulletTrail trail = Instantiate(_trailPrefab, shotPoint, Quaternion.identity);
-        trail.Init(trailTarget);
 
         _paticles.transform.position = shotPoint;
         _paticles.Play();

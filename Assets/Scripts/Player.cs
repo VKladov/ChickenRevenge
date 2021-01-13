@@ -5,101 +5,70 @@ using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterAiming))]
-[RequireComponent(typeof(CharacterShooting))]
-[RequireComponent(typeof(CharacterMover))]
-public class Player : MonoBehaviour
+public class Player : Character
 {
-    [SerializeField] PapuanMeetCollider _papuanTrigger;
-    [SerializeField] private GameField _field;
-    private Animator _animator;
-    private CharacterAiming _aiming;
-    private CharacterMover _mover;
-    private CharacterShooting _shooter;
+    [SerializeField] private SkinnedMeshRenderer _mesh;
+    [SerializeField] private Material _damageMaterial;
+    [SerializeField] private float _afterDamageDelay;
+    [SerializeField] private Collider _collider;
 
-    public bool IsStanned { get; private set; } = false;
+    private Material _defaultMaterial;
+    private Animator _animator;
+    private bool _couldGetDamage = true;
+    private CharacterAiming _aiming;
+
     public UnityAction<Papuan> MetPapuan;
     public UnityAction MetRoller;
     public UnityAction MetWoman;
     public UnityAction<Bonus> CaughtBonus;
 
-    private void Awake()
+    public UnityAction<int> HealthChanged;
+
+    protected override void Awake()
     {
+        base.Awake();
+        _defaultMaterial = _mesh.material;
         _animator = GetComponent<Animator>();
         _aiming = GetComponent<CharacterAiming>();
-        _mover = GetComponent<CharacterMover>();
-        _shooter = GetComponent<CharacterShooting>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        _papuanTrigger.MetPapuan += OnMetPapuan;
+        CharacterGroups.main.AddItemToGroupA(this);
     }
 
-    private void OnDisable()
+    public override void TakeDamage(int damage, bool fromPlayer = false)
     {
-        _papuanTrigger.MetPapuan -= OnMetPapuan;
-    }
-
-    public void Stan()
-    {
-        IsStanned = true;
-        int bottomLayerIndex = _animator.GetLayerIndex("BottomLayer");
-        int topLayerIndex = _animator.GetLayerIndex("TopLayer");
-        int commonLayerIndex = _animator.GetLayerIndex("CommonLayer");
-        _animator.SetLayerWeight(bottomLayerIndex, 0);
-        _animator.SetLayerWeight(topLayerIndex, 0);
-        _animator.SetLayerWeight(commonLayerIndex, 1);
-
-        _aiming.enabled = false;
-        _mover.enabled = false;
-        _shooter.enabled = false;
-        transform.position = _field.GetPositionOnTerrain(transform.position);
-        _animator.SetBool("IsStanned", true);
-    }
-
-    public void FinishStan()
-    {
-        IsStanned = false;
-        _animator.SetBool("IsStanned", false);
-
-        StartCoroutine(ReturnControl());
-    }
-
-    private IEnumerator ReturnControl()
-    {
-        yield return new WaitForSeconds(2);
-        int bottomLayerIndex = _animator.GetLayerIndex("BottomLayer");
-        int topLayerIndex = _animator.GetLayerIndex("TopLayer");
-        int commonLayerIndex = _animator.GetLayerIndex("CommonLayer");
-        _animator.SetLayerWeight(bottomLayerIndex, 1);
-        _animator.SetLayerWeight(topLayerIndex, 1);
-        _animator.SetLayerWeight(commonLayerIndex, 0);
-
-        _aiming.enabled = true;
-        _mover.enabled = true;
-        _shooter.enabled = true;
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (IsStanned)
-            return;
-
-        if (other.gameObject.TryGetComponent(out Bonus bonus))
+        if (_couldGetDamage)
         {
-            CaughtBonus?.Invoke(bonus);
-            Destroy(bonus.gameObject);
-        }
-        else if (other.gameObject.GetComponent<RollerWheel>())
-        {
-            MetRoller?.Invoke();
-        }
-        else if (other.gameObject.GetComponent<Woman>())
-        {
-            MetWoman?.Invoke();
+            base.TakeDamage(damage, fromPlayer);
+            StartCoroutine(ShowDamage());
+            StartCoroutine(SetImmortal());
+            HealthChanged?.Invoke(Health);
         }
     }
 
-    private void OnMetPapuan(Papuan papuan) => MetPapuan?.Invoke(papuan);
+    public void EnableAim() => _aiming.enabled = true;
+
+    public void DisableAim() => _aiming.enabled = false;
+
+    public override bool ShouldDestroy()
+    {
+        _animator.SetBool("IsAlive", false);
+        return false;
+    }
+
+    private IEnumerator ShowDamage()
+    {
+        _mesh.material = _damageMaterial;
+        yield return new WaitForSeconds(0.1f);
+        _mesh.material = _defaultMaterial;
+    }
+
+    private IEnumerator SetImmortal()
+    {
+        _couldGetDamage = false;
+        yield return new WaitForSeconds(_afterDamageDelay);
+        _couldGetDamage = true;
+    }
 }

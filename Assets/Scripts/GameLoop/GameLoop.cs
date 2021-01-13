@@ -3,250 +3,142 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum LostReason
+{
+    PlayerIsDead,
+    GateIsBroken
+}
+
 public class GameLoop : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private GameField _field;
-    [SerializeField] private ObstacleSpawner _obstacleSpawner;
-    [SerializeField] private BonusSpawner _bonusSpawner;
+    [SerializeField] private Gate _gate;
     [SerializeField] private PapuanSpawner _papuanSpawner;
     [SerializeField] private RollerSpawner _rollerSpawner;
-    [SerializeField] private WomanSpawner _womanSpawner;
     [SerializeField] private BirdSpawner _birdSpawner;
     [SerializeField] private JumperSpawner _jumperSpawner;
-    [SerializeField] private LevelBuilder _levelBuilder;
     [SerializeField] private float _wavesDelay = 2f;
-    [SerializeField] private int _lifes = 5;
-    [SerializeField] private int _startWaveSize = 24;
-    [SerializeField] private int _wavesPerLevel = 5;
-    [SerializeField] private float _stanDuration = 3f;
-    [SerializeField] private float _anyBonusChance = 0.1f;
-    [SerializeField] private float _diamondChance = 0.2f;
+    [SerializeField] private int _totalWavesCount;
+    [SerializeField] private int _startWaveSize = 10;
+    [SerializeField] private int _addPapuansPerWave = 2;
+    [SerializeField] private float _spawnDuration;
+    [SerializeField] private CameraChanger _cameraChanger;
+    [SerializeField] private GameInput _input;
 
     private int _currentWaveIndex = 0;
-    private int _currentLevel = 0;
+    private int _papuansToSpawnCount;
+    private float _spawnDelay;
 
-    public UnityAction<int> PapuasCountChanged;
+    public UnityAction<int> PapuansCountChanged;
     public UnityAction<int> LivesChanged;
     public UnityAction<int> WaveStarted;
+    public UnityAction<LostReason> PlayerLost;
+    public UnityAction PlayerWon;
+    public UnityAction PausePressed;
 
     private void OnEnable()
     {
-        _obstacleSpawner.CactusKilled += OnCactusKilled;
         _papuanSpawner.AllPapuansDied += AllPapuansDied;
         _papuanSpawner.PapuansCountChanged += OnPapuasCountChanged;
-        _papuanSpawner.PapuanKilled += OnPapuanKilled;
-        _player.MetPapuan += OnPlayerMetPapuan;
-        _player.MetRoller += OnMetRoller;
-        _player.MetWoman += OnMetWoman;
-        _player.CaughtBonus += OnPlayerGetBonus;
+        _player.Destroyed += OnPlayerDestroyed;
+        _gate.Destroyed += OnGateDestroyed;
     }
 
     private void OnDisable()
     {
-        _obstacleSpawner.CactusKilled -= OnCactusKilled;
         _papuanSpawner.AllPapuansDied -= AllPapuansDied;
         _papuanSpawner.PapuansCountChanged -= OnPapuasCountChanged;
-        _papuanSpawner.PapuanKilled -= OnPapuanKilled;
-        _player.MetPapuan -= OnPlayerMetPapuan;
-        _player.MetRoller -= OnMetRoller;
-        _player.MetWoman -= OnMetWoman;
-        _player.CaughtBonus -= OnPlayerGetBonus;
+        _player.Destroyed -= OnPlayerDestroyed;
+        _gate.Destroyed -= OnGateDestroyed;
     }
 
-    private void Start()
+    public void StartGame()
     {
-        _field.SetLevel(0);
-        _levelBuilder.SpawnObstacles(_obstacleSpawner);
-        _levelBuilder.UpdatePlayerArea(_field);
-        _obstacleSpawner.SpawnRandomCactuses();
-        _obstacleSpawner.SpawnTrees();
-
-        StartWave(0, false);
+        _cameraChanger.SwitchToPlayer();
+        StartWave(0);
     }
 
-    public void NextLevel()
+    public void EnableControl()
     {
-        Vector3 playerPositionInPlayerArea = new Vector3(_player.transform.position.x - _field.PlayerRect.min.x, 0, _player.transform.position.z - _field.PlayerRect.min.y);
-
-        _currentLevel++;
-        _field.SetLevel(_currentLevel);
-        _levelBuilder.UpdatePlayerArea(_field);
-
-        Vector3 position = new Vector3(_field.PlayerRect.min.x + playerPositionInPlayerArea.x, 0, _field.PlayerRect.min.y + playerPositionInPlayerArea.z);
-        _player.GetComponent<CharacterMover>().SetTarget(_field.GetPositionOnTerrain(position));
+        _input.enabled = true;
+        _player.EnableAim();
     }
 
-    private IEnumerator StartWave(int index, float delay)
+    public void DisableControl()
     {
-        if (index > 0 && index % _wavesPerLevel == 0)
-            NextLevel();
+        _input.enabled = false;
+        _player.DisableAim();
+    }
+
+    private void StartWave(int index)
+    {
+        _currentWaveIndex = index;
+        _papuansToSpawnCount = _startWaveSize + _addPapuansPerWave * _currentWaveIndex;
+        _spawnDelay = _spawnDuration / _papuansToSpawnCount;
 
         WaveStarted?.Invoke(index);
-        _currentWaveIndex = index;
-        yield return new WaitForSeconds(delay);
 
-        List<int> emptyCols = new List<int>();
-        for (int i = 0; i < _field.Cols; i++)
-            emptyCols.Add(i);
-
-        int count = _startWaveSize + index;
-        int cols = (count - _startWaveSize) % _wavesPerLevel + 1;
-        for (int i = 0; i < cols; i++)
-        {
-            int col = emptyCols[Random.Range(0, emptyCols.Count)];
-            emptyCols.Remove(col);
-
-            if (i == 0)
-                _papuanSpawner.SpawnGroup(col, count - cols + 1);
-            else
-                _papuanSpawner.SpawnGroup(col, 1);
-        }
-
-        _rollerSpawner.SetSpawnDelay(5);
-        _womanSpawner.SetSpawnDelay(5);
-        _birdSpawner.SetSpawnDelay(5);
-
-        //_rollerSpawner.StartSpawn(index > 5);
-        //_womanSpawner.StartSpawn(index > 5);
-        //_birdSpawner.StartSpawn(index > 5);
+        PapuansCountChanged?.Invoke(_papuansToSpawnCount);
+        StartCoroutine(SpawnPapuans());
     }
 
-    private void StartWave(int index, bool delay)
+    private IEnumerator SpawnPapuans()
     {
-        if (delay)
-            StartCoroutine(StartWave(index, _wavesDelay));
-        else
-            StartCoroutine(StartWave(index, 0));
+        while (_papuansToSpawnCount > 0)
+        {
+            yield return new WaitForSeconds(_spawnDelay);
+            _papuansToSpawnCount--;
+            _papuanSpawner.Spawn();
+        }
     }
 
     private void AllPapuansDied()
     {
-        FinishWave();
-        if (_player.IsStanned)
-            StartWave(_currentWaveIndex, true);
-        else
-            StartWave(_currentWaveIndex + 1, true);
+        if (_papuansToSpawnCount == 0)
+        {
+            if (_currentWaveIndex < _totalWavesCount - 1)
+            {
+                FinishWave();
+                StartWave(_currentWaveIndex + 1);
+            }
+            else
+            {
+                PlayerWon?.Invoke();
+            }
+        }
     }
 
     private void FinishWave()
     {
-        _rollerSpawner.DestroyAll();
-        _womanSpawner.DestroyAll();
-        _birdSpawner.DestroyAll();
 
-        _rollerSpawner.StopSpawn();
-        _womanSpawner.StopSpawn();
-        _birdSpawner.StopSpawn();
-
-        _obstacleSpawner.RestoreCactuses();
     }
 
-    private void OnPlayerMetPapuan(Papuan papuan)
+    private void OnPlayerDestroyed(DamageReceiver player)
     {
-        if (_player.IsStanned)
-            return;
-
-        papuan.CatchPlayer(_player);
-
-        Lose();
-
-        if (_lifes > 0)
-            StartCoroutine(ReleaseChickenAfter(_stanDuration, papuan));
-        else
-            FinishGame();
+        DisableControl();
+        StartCoroutine(DelayLost(LostReason.PlayerIsDead));
     }
 
-    private void OnMetRoller()
+    private void OnGateDestroyed(DamageReceiver gate)
     {
-        if (_player.IsStanned)
-            return;
-
-        Lose();
-
-        if (_lifes > 0)
-            StartCoroutine(UnstanChickenAfter(_stanDuration));
-        else
-            FinishGame();
+        _cameraChanger.SwitchToGate();
+        StartCoroutine(DelayLost(LostReason.GateIsBroken));
     }
 
-    private void OnMetWoman()
+    private IEnumerator DelayLost(LostReason reason)
     {
-        OnMetRoller();
-    }
-
-    private void Lose()
-    {
-        _player.Stan();
-        _papuanSpawner.SendAllPapuansDown();
-        _lifes--;
-
-        LivesChanged?.Invoke(_lifes);
-    }
-
-    private void FinishGame() { }
-
-    private IEnumerator UnstanChickenAfter(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        _player.FinishStan();
-    }
-
-    private IEnumerator ReleaseChickenAfter(float delay, Papuan papuan)
-    {
-        yield return new WaitForSeconds(delay);
-        ReleaseChicken(papuan);
-    }
-
-    private void ReleaseChicken(Papuan papuan)
-    {
-        papuan.Destroy();
-        _player.FinishStan();
+        yield return new WaitForSeconds(2);
+        PlayerLost?.Invoke(reason);
     }
 
     private void OnPapuasCountChanged(int count)
     {
-        PapuasCountChanged?.Invoke(count);
-    }
-
-    private void OnCactusKilled(Vector3 position)
-    {
-        if (Random.Range(0.0f, 1f) <= _anyBonusChance)
-            if (Random.Range(0.0f, 1f) <= _diamondChance)
-                _bonusSpawner.SpawnDiamond(position);
-            else
-                _bonusSpawner.SpawnCoin(position);
-    }
-
-    private void OnPapuanKilled(Papuan papuan) => _obstacleSpawner.SpawnCactusNearby(papuan.transform.position);
-
-    private void OnPlayerGetBonus(Bonus bonus)
-    {
-        switch (bonus.BonusName)
-        {
-            case BonusName.CactusesCleaner:
-                _obstacleSpawner.RemoveCactuses(_field.MinRow, _field.MinRow + _field.PlayerRows * 2);
-                break;
-            default:
-                break;
-        }
+        PapuansCountChanged?.Invoke(_papuansToSpawnCount + count);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-            _rollerSpawner.Spawn();
-
-        if (Input.GetKeyDown(KeyCode.V))
-            _womanSpawner.Spawn();
-
-        if (Input.GetKeyDown(KeyCode.B))
-            _birdSpawner.Spawn();
-
-        if (Input.GetKeyDown(KeyCode.N))
-            _jumperSpawner.Spawn();
-
-        if (Input.GetKeyDown(KeyCode.M))
-            _obstacleSpawner.SpawnStone();
+        if (_input.WasPausePressed)
+            PausePressed?.Invoke();
     }
 }

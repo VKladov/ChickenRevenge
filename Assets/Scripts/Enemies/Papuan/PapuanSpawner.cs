@@ -5,53 +5,34 @@ using UnityEngine.Events;
 
 public class PapuanSpawner : MonoBehaviour
 {
-    [SerializeField] private GameField _field;
-    [SerializeField] private ObstacleSpawner _obstacleSpawner;
+    [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private Papuan _papuanPrefab;
+    [SerializeField] private Gate _gate;
 
+    private int _currentSpawnIndex = 0;
     private List<Papuan> _papuans = new List<Papuan>();
 
     public UnityAction AllPapuansDied;
     public UnityAction<int> PapuansCountChanged;
     public UnityAction<Papuan> PapuanKilled;
-    public int MinRow => _field.MinRow;
-    public int PlayerRows => _field.PlayerRows;
 
-    public void SendAllPapuansDown()
+    public void Spawn()
     {
-        foreach (Papuan papuan in _papuans)
-            papuan.RunDown(_field.PlayerRect.min.y);
-    }
+        Papuan papuan = Instantiate(_papuanPrefab, _spawnPoints[_currentSpawnIndex].position, Quaternion.LookRotation(Vector3.back));
+        _currentSpawnIndex = (_currentSpawnIndex + 1) % _spawnPoints.Length;
 
-    public void SpawnGroup(int col, int count)
-    {
-        float z = _field.Rect.max.y;
-        float distance = 0.5f;
-        Papuan _prevPapuan = null;
-        for (int i = 0; i < count; i++)
-        {
-            Vector3 papuanPosition = new Vector3(col * _field.CellSize, 0, z + distance * i);
-            papuanPosition = _field.GetPositionOnTerrain(papuanPosition);
-            Papuan papuan = Instantiate(_papuanPrefab, papuanPosition, Quaternion.LookRotation(Vector3.back));
-            papuan.Init(this, _field.MinRow + _field.Rows, col, _prevPapuan);
+        papuan.Init(_gate, FindObjectOfType<Player>());
 
-            papuan.Destroyed += OnPapuanDestroyed;
-            papuan.Killed += OnPapuanKilled;
-            papuan.Disappeared += OnPapuanDisappeared;
+        papuan.Destroyed += OnPapuanDestroyed;
+        papuan.Killed += OnPapuanKilled;
+        papuan.Disappeared += OnPapuanDisappeared;
 
-            _papuans.Add(papuan);
-            _prevPapuan = papuan;
-        }
+        _papuans.Add(papuan);
+
+        CharacterGroups.main.AddItemToGroupB(papuan);
 
         PapuansCountChanged?.Invoke(_papuans.Count);
     }
-
-    public void GetAllowedDirections(int row, int col, out bool left, out bool right)
-    {
-        _obstacleSpawner.GetAllowedDirections(row, col, out left, out right);
-    }
-
-    public Vector3 GetPosition(int row, int col) => _field.GetPosition(row, col);
 
     private void OnPapuanKilled(DamageReceiver papuan)
     {
@@ -71,5 +52,11 @@ public class PapuanSpawner : MonoBehaviour
 
         if (_papuans.Count == 0)
             AllPapuansDied?.Invoke();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+            Spawn();
     }
 }

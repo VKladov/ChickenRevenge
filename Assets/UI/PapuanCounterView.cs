@@ -11,12 +11,12 @@ public class PapuanCounterView : MonoBehaviour
 
     private void OnEnable()
     {
-        _game.PapuasCountChanged += OnPapuasCountChanged;
+        _game.PapuansCountChanged += OnPapuasCountChanged;
     }
 
     private void OnDisable()
     {
-        _game.PapuasCountChanged -= OnPapuasCountChanged;
+        _game.PapuansCountChanged -= OnPapuasCountChanged;
     }
 
     public void OnPapuasCountChanged(int count)

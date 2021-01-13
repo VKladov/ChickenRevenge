@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4337640761172433692}
   - component: {fileID: 182882020489754233}
   - component: {fileID: 3123816861353236817}
-  - component: {fileID: 5601257709138347854}
   m_Layer: 0
   m_Name: Wood_6
   m_TagString: Untagged
@@ -110,25 +109,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4661684142153642685}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7578106, y: 0.5723388, z: 2.8279307}
-  m_Center: {x: 0.10454178, y: 0.023299696, z: 1.4128394}
---- !u!114 &5601257709138347854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4661684142153642685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb21fa6255ea144a48ab5daa69799a6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 5
-  _damageParticle: {fileID: 2565576530052848311}
+  m_Size: {x: 0.7578106, y: 0.31282684, z: 1.3195164}
+  m_Center: {x: 0.10454178, y: 0.023299724, z: 0.65863365}
 --- !u!1001 &8827237029215319881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -216,12 +201,6 @@ PrefabInstance:
 --- !u!4 &3841280482262310607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5750636510108936582, guid: e9e46c33da5734a018d281309fdde92a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8827237029215319881}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2565576530052848311 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6420557528184958462, guid: e9e46c33da5734a018d281309fdde92a,
     type: 3}
   m_PrefabInstance: {fileID: 8827237029215319881}
   m_PrefabAsset: {fileID: 0}

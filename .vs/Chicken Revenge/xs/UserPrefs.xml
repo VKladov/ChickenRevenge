@@ -1,34 +1,26 @@
 ﻿<Properties StartupConfiguration="{83781460-430E-2AC7-7508-6D853317C74D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument=".gitignore">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Enemy/PapuanState.cs">
     <Files>
-      <File FileName="Assets/Materials/QuickOutline/Scripts/Outline.cs" Line="211" Column="1" />
-      <File FileName="Assets/UI/Menu.cs" />
-      <File FileName="Assets/UI/GameData.cs" />
-      <File FileName="Assets/Scripts/Enemies/Papuan/PapuanSpawner.cs" />
-      <File FileName="Assets/Scripts/GameLoop/GameLoop.cs" />
-      <File FileName="Assets/UI/PapuanCounterView.cs" />
-      <File FileName="Assets/UI/GameOverScreen.cs" />
-      <File FileName="Assets/Scripts/CharacterShooting.cs" />
-      <File FileName="Assets/Scripts/Gate/Gate.cs" />
-      <File FileName="Assets/Scripts/DamageReceiver.cs" />
-      <File FileName="Assets/Scripts/CameraChanger.cs" />
-      <File FileName="Assets/UI/MainMenu.cs" />
-      <File FileName="Assets/Scripts/GameInput.cs" />
-      <File FileName="Assets/Scripts/CharacterMover.cs" />
-      <File FileName="Assets/Scripts/CharacterAiming.cs" />
-      <File FileName="Assets/UI/MenuInput.cs" />
-      <File FileName="Assets/Scripts/Weapons/HitscanGun.cs" />
-      <File FileName="Assets/Scripts/Player.cs" Line="48" Column="10" />
-      <File FileName="Assets/Scripts/Character.cs" />
-      <File FileName="Assets/UI/WavesNumberView.cs" />
-      <File FileName="Assets/Scripts/Enemies/Papuan/Papuan.cs" />
-      <File FileName="Assets/Scripts/Bullet.cs" Line="1" Column="1" />
-      <File FileName=".gitignore" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/App.cs" Line="12" Column="45" />
+      <File FileName="Assets/Scripts/GameLoop.cs" Line="51" Column="17" />
+      <File FileName="Assets/Scripts/Player/Player.cs" Line="26" Column="57" />
+      <File FileName="Assets/Scripts/UI/PauseScreen.cs" Line="33" Column="6" />
+      <File FileName="Assets/Scripts/Character/Character.cs" Line="28" Column="1" />
+      <File FileName="Assets/Scripts/Character/DamageReceiver.cs" Line="58" Column="21" />
+      <File FileName="Assets/Scripts/Weapons/DoubleRifle.cs" Line="83" Column="6" />
+      <File FileName="Assets/Scripts/Gate/Gate.cs" Line="35" Column="1" />
+      <File FileName="Assets/Scripts/Player/CharacterShooting.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/CharacterMover.cs" Line="45" Column="35" />
+      <File FileName="Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" Line="180" Column="87" />
+      <File FileName="Assets/Plugins/QuickOutline/Scripts/Outline.cs" Line="16" Column="26" />
+      <File FileName="Assets/Scripts/CameraChanger.cs" Line="29" Column="24" />
+      <File FileName="Assets/Scripts/Sounds.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Enemy/PapuanState.cs" Line="22" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="a355d9b1-881c-41ee-9b8c-a68648c3eae9" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0876ece5-4dcd-4aa1-8ef3-51767cc9aa52" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

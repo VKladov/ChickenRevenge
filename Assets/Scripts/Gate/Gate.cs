@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Collider))]
 public class Gate : DamageReceiver
 {
     [SerializeField] private GateSlote[] _slots;
@@ -13,21 +13,47 @@ public class Gate : DamageReceiver
     [SerializeField] private Mesh[] _rightDoorMesh;
     [SerializeField] private Animator _brokenPartsAnimator;
 
-    private BoxCollider _collider;
+    private Collider _collider;
     private Dictionary<int, Mesh> _leftDoorHealthToMesh = new Dictionary<int, Mesh>();
     private Dictionary<int, Mesh> _rightDoorHealthToMesh = new Dictionary<int, Mesh>();
+
+    public GateSlote GetSlote()
+    {
+        foreach (GateSlote oneSlote in _slots)
+            if (oneSlote.IsEmpty)
+                return oneSlote;
+
+        return _slots[Random.Range(0, _slots.Length)];
+    }
+
+    protected override void TakeDamage(int damage, bool fromPlayer = false)
+    {
+        base.TakeDamage(damage, fromPlayer);
+        Sounds.main.PlayWoodHit(transform.position);
+        UpdateGatesMesh();
+    }
+
+    protected override bool ShouldDestroy()
+    {
+        _collider.enabled = false;
+        _leftDoor.gameObject.SetActive(false);
+        _rightDoor.gameObject.SetActive(false);
+        _brokenPartsAnimator.gameObject.SetActive(true);
+        _brokenPartsAnimator.SetBool("isBroken", true);
+        return false;
+    }
 
     protected override void Awake()
     {
         base.Awake();
-        _collider = GetComponent<BoxCollider>();
+        _collider = GetComponent<Collider>();
 
         if (_leftDoorMesh.Length != _rightDoorMesh.Length)
             throw new System.Exception();
 
         for (int i = 0; i < _leftDoorMesh.Length; i++)
         {
-            int keyHealth = _health - (i + 1) * (_health / _leftDoorMesh.Length);
+            int keyHealth = MaxHealth - (i + 1) * (MaxHealth / _leftDoorMesh.Length);
             _leftDoorHealthToMesh[keyHealth] = _leftDoorMesh[i];
             _rightDoorHealthToMesh[keyHealth] = _rightDoorMesh[i];
         }
@@ -41,7 +67,7 @@ public class Gate : DamageReceiver
         Mesh _rightDoorMesh = null;
         foreach (var healthMesh in _leftDoorHealthToMesh)
         {
-            if (healthMesh.Key <= _health)
+            if (healthMesh.Key <= Health)
             {
                 _leftDoorMesh = healthMesh.Value;
                 _rightDoorMesh = _rightDoorHealthToMesh[healthMesh.Key];
@@ -54,33 +80,5 @@ public class Gate : DamageReceiver
 
         if (_rightDoorMesh != null)
             _rightDoor.mesh = _rightDoorMesh;
-    }
-
-    public UnityAction<int> HealthChanged;
-
-    public GateSlote GetSlote()
-    {
-        foreach (GateSlote oneSlote in _slots)
-            if (oneSlote.IsEmpty)
-                return oneSlote;
-
-        return _slots[Random.Range(0, _slots.Length)];
-    }
-
-    public override void TakeDamage(int damage, bool fromPlayer = false)
-    {
-        base.TakeDamage(damage, fromPlayer);
-        HealthChanged?.Invoke(_health);
-        UpdateGatesMesh();
-    }
-
-    public override bool ShouldDestroy()
-    {
-        _collider.enabled = false;
-        _leftDoor.gameObject.SetActive(false);
-        _rightDoor.gameObject.SetActive(false);
-        _brokenPartsAnimator.gameObject.SetActive(true);
-        _brokenPartsAnimator.SetBool("isBroken", true);
-        return false;
     }
 }

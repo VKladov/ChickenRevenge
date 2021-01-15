@@ -16,12 +16,6 @@ public class HitscanGun : Gun
         {
             if (target.collider.gameObject.TryGetComponent(out DamageReceiver destroyable))
                 destroyable.TakeShot(_damage);
-
-            if (target.collider.gameObject.TryGetComponent(out StonePiece stone))
-                Destroy(stone.gameObject);
-
-            if (target.collider.gameObject.TryGetComponent(out ShootableObject shootable))
-                shootable.TakeShoot(target.point, shootPoint.forward);
         }
 
         BulletTrail trail = Instantiate(_trailPrefab, shootPoint.position, Quaternion.identity);

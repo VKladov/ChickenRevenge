@@ -163,7 +163,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.9
+  m_fontSize: 64.6
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.45
+  m_fontSize: 32.3
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -497,7 +497,7 @@ PrefabInstance:
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 128.4
       objectReference: {fileID: 0}
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
@@ -507,12 +507,12 @@ PrefabInstance:
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 256.8
       objectReference: {fileID: 0}
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
@@ -548,6 +548,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217447417882070062, guid: 41619ae08920449ca9f056b4d2dca6d8,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 23.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41619ae08920449ca9f056b4d2dca6d8, type: 3}
@@ -634,7 +639,7 @@ PrefabInstance:
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 128.4
       objectReference: {fileID: 0}
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
@@ -644,12 +649,12 @@ PrefabInstance:
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 256.8
       objectReference: {fileID: 0}
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6217447417764386449, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
@@ -694,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 6217447417882070062, guid: 41619ae08920449ca9f056b4d2dca6d8,
         type: 3}
       propertyPath: m_fontSize
-      value: 26.85
+      value: 27.55
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41619ae08920449ca9f056b4d2dca6d8, type: 3}
